@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'main',  # регистрируем приложение main
+    'goods',  # регистрируем приложение goods
 ]
 # промежуточные слои
 MIDDLEWARE = [

@@ -17,9 +17,9 @@ Examples:
 from django.contrib import admin
 from django.urls import path, include
 
-import main
 
 urlpatterns = [
     path('admin/', admin.site.urls), # путь к админке
     path('', include('main.urls', namespace='main')), # путь к главной странице
+    path('catalog/', include('goods.urls', namespace='catalog')), # путь к странице каталога
 ]
