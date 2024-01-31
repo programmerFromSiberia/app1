@@ -2,11 +2,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import context
 
+# Получаем доступ к ОРМ Системе а именно к Категориям
+from goods.models import Categories 
+
+
 # обработчик запросов (контроллеров) на главной странице сайта
 def index(request):
+    
+    categories = Categories.objects.all()
     context = {
         'title': 'VIA - Главная',
-        'content': 'Магазин мебели VIA'               
+        'content': 'Магазин мебели в стиле "Ретро" VIA',
+        'categories': categories               
     }
     
     return render(request, 'main/index.html', context) # главная страница
