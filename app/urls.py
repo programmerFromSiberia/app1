@@ -17,9 +17,18 @@ Examples:
 from django.contrib import admin
 from django.urls import path, include
 
+from app.settings import DEBUG
+
 
 urlpatterns = [
     path('admin/', admin.site.urls), # путь к админке
     path('', include('main.urls', namespace='main')), # путь к главной странице
     path('catalog/', include('goods.urls', namespace='catalog')), # путь к странице каталога
+    
+    # path("__debug__/", include("debug_toolbar.urls")),
 ]
+
+if DEBUG:
+    urlpatterns += [
+       path("__debug__/", include("debug_toolbar.urls")),
+    ]
