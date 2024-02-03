@@ -1,68 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
+
+from goods.models import Products 
 
 
-def catalog(request):
+def catalog(request, category_slug):
+    
+    if category_slug == "all":
+        goods = Products.objects.all()  # отображаем все продукты
+    else:
+        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug)) # отображаем пустую страницу 404 если товара нет
+    
+       
     context = {
         "title": "VIA - Каталог",
-        "goods": [
-            {
-                "image": "deps/images/goods/set of tea table and three chairs.jpg",
-                "name": "Чайный столик  и три стула в стиле 'Ретро'",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 150.00,
-            },
-            {
-                "image": "deps/images/goods/set of tea table and two chairs.jpg",
-                "name": "Чайный столик и два стула в стиле 'Ретро'",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 93.00,
-            },
-            {
-                "image": "deps/images/goods/double bed.jpg",
-                "name": "Двухспальная кровать в стиле 'Ретро'",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 670.00,
-            },
-            {
-                "image": "deps/images/goods/kitchen table.jpg",
-                "name": "Кухонный стол с раковиной в стиле 'Модерн'",
-                "description": "Модерн объединяет в себе классические принципы оформления интерьера с современными европейскими мотивами. ",
-                "price": 365.00,
-            },
-            {
-                "image": "deps/images/goods/kitchen table 2.jpg",
-                "name": "Кухонный стол с встроенной раковиной",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 430.00,
-            },
-            {
-                "image": "deps/images/goods/corner sofa.jpg",
-                "name": "Угловой диван для гостиной",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 610.00,
-            },
-            {
-                "image": "deps/images/goods/bedside table.jpg",
-                "name": "Прикроватный столик",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 55.00,
-            },
-            {
-                "image": "deps/images/goods/sofa.jpg",
-                "name": "Диван Ретро",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 190.00,
-            },
-            {
-                "image": "deps/images/goods/office chair.jpg",
-                "name": "Стул офисный в стиле ретро",
-                "description": "это стилизация под интерьеры первой половины XX века: потертая мебель, приглушенные, выцветшие оттенки, налет патины на металле и старинные декоративные предметы.",
-                "price": 30.00,
-            },
-        ],
+         "goods": goods,
+   
     }
     return render(request, "goods/catalog.html", context)
 
 
-def product(request):
-    return render(request, "goods/product.html")
+def product(request, product_slug):
+    
+    product = Products.objects.get(slug=product_slug) # отображаем продукт по слагу
+    
+    context: dict = {"product": product}
+    
+    return render(request, "goods/product.html", context=context)

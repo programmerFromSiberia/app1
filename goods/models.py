@@ -32,5 +32,15 @@ class Products(models.Model):
     def __str__(self):
         return f'{self.name} Количество - {self.quantity}'
     
+    #  Определяем метод который будет выводить в шаблоне id продукта (товара)
+    
+    def display_id(self):
+        return f'{self.id:05}'
+    
+    def sell_price(self):   # рассчитываем стоимость товара со скидкой
+        if self.discount:
+            return round (self.price - self.price*self.discount/100, 2)
+        
+        return self.price  # возвращаем цену товара если скидки нет
  
    
