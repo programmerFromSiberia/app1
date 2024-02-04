@@ -1,22 +1,26 @@
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.core.paginator import Paginator
+from django.shortcuts import get_list_or_404, render
 
 from goods.models import Products 
 
 
-def catalog(request, category_slug):
+def catalog(request, category_slug, page=1,):  # каталог
     
     if category_slug == "all":
         goods = Products.objects.all()  # отображаем все продукты
     else:
-        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug)) # отображаем пустую страницу 404 если товара нет
+        goods = get_list_or_404(Products.objects.filter (category__slug=category_slug)) # отображаем продукты по категориям category_slug если продукта нет возвращаем get_list_or_404 
+        
+    paginator = Paginator(goods, 3) # пагинатор 3 продукта на странице
+    current_page = paginator.page(page) # текущая страница
     
-       
     context = {
-        "title": "VIA - Каталог",
-         "goods": goods,
+        "title": "VIA - Каталог", # заголовок страницы
+         "goods": current_page, # отображаем текущую страницу
+         "slug_url": category_slug
    
     }
-    return render(request, "goods/catalog.html", context)
+    return render(request, "goods/catalog.html", context) 
 
 
 def product(request, product_slug):

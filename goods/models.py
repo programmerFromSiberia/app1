@@ -8,14 +8,15 @@ class Categories(models.Model):
         db_table = 'category'
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
+        
 
     def __str__(self):
         return self.name
 
 
 class Products(models.Model): # Таблица продуктов
-    name = models.CharField(max_length=150, unique=True, verbose_name='Название')
-    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
+    name = models.CharField(max_length=150, unique=True, verbose_name='Название') 
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL') 
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     image = models.ImageField(upload_to='goods_images', blank=True, null=True, verbose_name='Изображение')
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Цена')
@@ -24,22 +25,23 @@ class Products(models.Model): # Таблица продуктов
     category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name='Категория')
 
 
-    class Meta:
+    class Meta:  
         db_table = 'product'
-        verbose_name = 'Продукт'
+        verbose_name = 'Продукт' 
         verbose_name_plural = 'Продукты'
+        ordering = ('id',)  # сортируем по id
 
-    def __str__(self):
-        return f'{self.name} Количество - {self.quantity}'
+    def __str__(self): 
+        return f'{self.name} Количество - {self.quantity}'  # выводим название и количество
     
     #  Определяем метод который будет выводить в шаблоне id продукта (товара)
     
     def display_id(self):
-        return f'{self.id:05}'
+        return f'{self.id:05}'  # добавляем нули в начале
     
     def sell_price(self):   # рассчитываем стоимость товара со скидкой
         if self.discount:
-            return round (self.price - self.price*self.discount/100, 2)
+            return round (self.price - self.price*self.discount/100, 2)  # возвращаем цену со скидкой
         
         return self.price  # возвращаем цену товара если скидки нет
  

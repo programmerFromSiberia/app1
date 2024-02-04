@@ -22,11 +22,10 @@ from app import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # путь к админке
+    path('admin/', admin.site.urls), # путь к админ панели
     path('', include('main.urls', namespace='main')), # путь к главной странице
     path('catalog/', include('goods.urls', namespace='catalog')), # путь к странице каталога
     
-    # path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:
