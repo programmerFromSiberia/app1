@@ -8,6 +8,5 @@ app_name = 'goods' # пространство имен
 
 urlpatterns = [
     path('<slug:category_slug>/', views.catalog, name='index'), # путь к каталогу товаров
-    path('<slug:category_slug>/<int:page>/', views.catalog, name='index'), # путь к каталогу товаров
     path('product/<slug:product_slug>/', views.product, name='product'), # путь к  продуктам прописываем product_id во views   
 ]

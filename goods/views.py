@@ -4,7 +4,9 @@ from django.shortcuts import get_list_or_404, render
 from goods.models import Products 
 
 
-def catalog(request, category_slug, page=1,):  # каталог
+def catalog(request, category_slug):  # каталог
+    
+    page = request.GET.get("page", 1)  # получаем текущую страницу
     
     if category_slug == "all":
         goods = Products.objects.all()  # отображаем все продукты
@@ -12,7 +14,7 @@ def catalog(request, category_slug, page=1,):  # каталог
         goods = get_list_or_404(Products.objects.filter (category__slug=category_slug)) # отображаем продукты по категориям category_slug если продукта нет возвращаем get_list_or_404 
         
     paginator = Paginator(goods, 3) # пагинатор 3 продукта на странице
-    current_page = paginator.page(page) # текущая страница
+    current_page = paginator.page(int(page)) # текущая страница
     
     context = {
         "title": "VIA - Каталог", # заголовок страницы
