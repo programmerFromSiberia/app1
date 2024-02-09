@@ -30,6 +30,7 @@ def q_search(query):  # поиск по поисковому запросу
     
 # Формируем запросы для поиска
 
+# поиск по названию
     result = result.annotate(
         headline=SearchHeadline(
             "name",
@@ -37,7 +38,9 @@ def q_search(query):  # поиск по поисковому запросу
             start_sel='<span style="background-color: yellow;">', # формируем выделение для названия
             stop_sel="</span>", # закрываем тег span 
         )
-    ) # поиск по названию
+    ) 
+
+# поиск по описанию
 
     result = result.annotate(
         bodyline=SearchHeadline(
@@ -46,7 +49,7 @@ def q_search(query):  # поиск по поисковому запросу
             start_sel='<span style="background-color: yellow;">',
             stop_sel="</span>",
         )
-    )  # поиск по описанию
+    )  
     
     return result  # возвращаем результат
     

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     
     'main',  # регистрируем приложение main
     'goods',  # регистрируем приложение goods
+    'users',  # регистрируем приложение users
 ]
 # промежуточные слои
 MIDDLEWARE = [
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

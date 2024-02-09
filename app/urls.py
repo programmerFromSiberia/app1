@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # путь к админ панели
     path('', include('main.urls', namespace='main')), # путь к главной странице
     path('catalog/', include('goods.urls', namespace='catalog')), # путь к странице каталога
-    
+    path('user/', include('users.urls', namespace='user')), # путь к странице пользователя
 ]
 
 if settings.DEBUG:

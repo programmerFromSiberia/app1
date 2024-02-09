@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load goods_tags %} 
 
@@ -50,7 +50,6 @@
     {% if request.GET.q %}
     <h3 class="mt-4">Результаты поиска по запросу {{ request.GET.q }}</h3>
     {% if not goods %}
-        <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}">  <!-- Клеим футер -->
         <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
         <h2 class="mt-4">По запросу ничего не найдено</h2>
     {% endif %}
@@ -79,7 +78,7 @@
                     <p class="card-text text-truncate">
                         {% autoescape off %}
                             {% if product.bodyline %}
-                            {{product.bodyline |truncatechars:55}}
+                            {{product.bodyline|truncatechars:55}}
                             {% else %}
                             {{ product.description|truncatechars:55 }}
                             {% endif %}
@@ -113,7 +112,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center my-4">
             <div class="custom-shadow d-flex">
-                
+
                 <li class="page-item {% if not goods.has_previous %}disabled{% endif %}">
                     <a class="page-link" href="{% if goods.has_previous %}?{% change_params page=goods.previous_page_number %}{% else %}#{% endif %}">Назад</a>           
                 </li>  
