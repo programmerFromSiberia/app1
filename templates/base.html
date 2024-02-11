@@ -175,10 +175,11 @@
         <div class="container">
             <div class="row mt-1">
                 <div class="col-lg-2">
-                    <!-- Пустой блок на Ваше усмотрение -->
+                    <!-- Пустой блок заполним при надобности -->
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
+                    {% include "includes/notifications.html" %}
                     {% block content %}{% endblock %}
                 </div>
             </div>
