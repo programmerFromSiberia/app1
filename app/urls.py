@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')), # путь к главной странице
     path('catalog/', include('goods.urls', namespace='catalog')), # путь к странице каталога
     path('user/', include('users.urls', namespace='user')), # путь к странице пользователя
+    path('cart/', include('carts.urls', namespace='cart')), # путь к странице корзины
 ]
 
 if settings.DEBUG:
